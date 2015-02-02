@@ -49,7 +49,8 @@ class Chef
     	def get_build(coordinates)
     		get_actual_version(coordinates)
     		coordinates[:build] = if snapshot?(coordinates[:version])
-    			REXML::Document.new(get_version_info(coordinates)).elements["//extension[text()='#{coordinates[:packaging]}']/../value"]
+    			#REXML::Document.new(get_version_info(coordinates)).elements["//extension[text()='#{coordinates[:packaging]}']/../value"]
+    			REXML::Document.new(get_version_info(coordinates)).elements["//extension[text()='#{coordinates[:packaging]}']"].text
     		else
     			coordinates[:version]
     		end
