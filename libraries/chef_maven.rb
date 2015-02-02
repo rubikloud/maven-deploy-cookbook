@@ -50,7 +50,9 @@ class Chef
     		get_actual_version(coordinates)
     		coordinates[:build] = if snapshot?(coordinates[:version])
     			#REXML::Document.new(get_version_info(coordinates)).elements["//extension[text()='#{coordinates[:packaging]}']/../value"]
-    			REXML::Document.new(get_version_info(coordinates)).elements["//extension[text()='#{coordinates[:packaging]}']"].text
+    			#REXML::Document.new(get_version_info(coordinates)).elements["//extension[text()='#{coordinates[:packaging]}']"].text
+                metadata = REXML::Document.new(get_version_info(coordinates))
+                REXML::XPath.first(metadata, '//buildNumber')
     		else
     			coordinates[:version]
     		end
